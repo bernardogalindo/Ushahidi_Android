@@ -34,24 +34,41 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.params.ConnManagerPNames;
+import org.apache.http.conn.params.ConnPerRouteBean;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.conn.ssl.X509HostnameVerifier;
+import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.SingleClientConnManager;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -96,7 +113,7 @@ public class MainHttpClient {
 
     private static MultipartEntity entity;
 
-    private static final String CLASS_TAG = MainHttpClient.class.getCanonicalName();
+    private static final String CLASS_TAG = MainHttpClient.class.getSimpleName();
 
     private int timeoutConnection = 60000;
 
@@ -104,19 +121,22 @@ public class MainHttpClient {
 
     private static final int IO_BUFFER_SIZE = 512;
 
-    public MainHttpClient() {
+    public MainHttpClient(Context context) {
 
         httpParameters = new BasicHttpParams();
+        httpParameters.setParameter(ConnManagerPNames.MAX_TOTAL_CONNECTIONS, 1);
+        httpParameters.setParameter(ConnManagerPNames.MAX_CONNECTIONS_PER_ROUTE,
+                new ConnPerRouteBean(1));
 
+        httpParameters.setParameter(HttpProtocolParams.USE_EXPECT_CONTINUE, false);
+        HttpProtocolParams.setVersion(httpParameters, HttpVersion.HTTP_1_1);
+        HttpProtocolParams.setContentCharset(httpParameters, "utf8");
         // Set the timeout in milliseconds until a connection is established.
         HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
 
         // in milliseconds which is the timeout for waiting for data.
         HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
-<<<<<<< HEAD
-        httpClient = new DefaultHttpClient(httpParameters);
-=======
         SchemeRegistry schemeRegistry = new SchemeRegistry();
 
         // http scheme
@@ -127,7 +147,6 @@ public class MainHttpClient {
         httpClient = new DefaultHttpClient(new ThreadSafeClientConnManager(httpParameters,
                 schemeRegistry), httpParameters);
 
->>>>>>> 0968330... Update document to reflect current changes
     }
 
     public static HttpResponse GetURL(String URL) throws IOException {
@@ -224,9 +243,9 @@ public class MainHttpClient {
                 HttpEntity respEntity = response.getEntity();
                 if (respEntity != null) {
                     InputStream serverInput = respEntity.getContent();
-                    
+
                     return GetText(serverInput);
-                    
+
                 }
             }
 
@@ -241,8 +260,12 @@ public class MainHttpClient {
         return "";
     }
 
-    public static boolean PostFileUpload(String URL, HashMap<String, String> params)
-            throws IOException {
+    /**
+     * Upload files to server 0 - success, 1 - missing parameter, 2 - invalid
+     * parameter, 3 - post failed, 5 - access denied, 6 - access limited, 7 - no
+     * data, 8 - api disabled, 9 - no task found, 10 - json is wrong
+     */
+    public static int PostFileUpload(String URL, HashMap<String, String> params) throws IOException {
         Log.d(CLASS_TAG, "PostFileUpload(): upload file to server.");
 
         entity = new MultipartEntity();
@@ -254,9 +277,11 @@ public class MainHttpClient {
             if (params != null) {
 
                 entity.addPart("task", new StringBody(params.get("task")));
-                entity.addPart("incident_title", new StringBody(params.get("incident_title"),Charset.forName("UTF-8")));
-                entity.addPart("incident_description",
-                        new StringBody(params.get("incident_description"),Charset.forName("UTF-8")));
+                entity.addPart("incident_title", new StringBody(params.get("incident_title"),
+                        Charset.forName("UTF-8")));
+                entity.addPart(
+                        "incident_description",
+                        new StringBody(params.get("incident_description"), Charset.forName("UTF-8")));
                 entity.addPart("incident_date", new StringBody(params.get("incident_date")));
                 entity.addPart("incident_hour", new StringBody(params.get("incident_hour")));
                 entity.addPart("incident_minute", new StringBody(params.get("incident_minute")));
@@ -264,16 +289,22 @@ public class MainHttpClient {
                 entity.addPart("incident_category", new StringBody(params.get("incident_category")));
                 entity.addPart("latitude", new StringBody(params.get("latitude")));
                 entity.addPart("longitude", new StringBody(params.get("longitude")));
-                entity.addPart("location_name", new StringBody(params.get("location_name"),Charset.forName("UTF-8")));
-                entity.addPart("person_first", new StringBody(params.get("person_first"),Charset.forName("UTF-8")));
-                entity.addPart("person_last", new StringBody(params.get("person_last"),Charset.forName("UTF-8")));
-                entity.addPart("person_email", new StringBody(params.get("person_email"),Charset.forName("UTF-8")));
+                entity.addPart("location_name",
+                        new StringBody(params.get("location_name"), Charset.forName("UTF-8")));
+                entity.addPart("person_first",
+                        new StringBody(params.get("person_first"), Charset.forName("UTF-8")));
+                entity.addPart("person_last",
+                        new StringBody(params.get("person_last"), Charset.forName("UTF-8")));
+                entity.addPart("person_email",
+                        new StringBody(params.get("person_email"), Charset.forName("UTF-8")));
 
-                Log.i("HTTP Client:", "filename:" + Preferences.savePath + params.get("filename"));
-
-                if (!TextUtils.isEmpty(params.get("filename")))
-                    entity.addPart("incident_photo[]", new FileBody(
-                            new File(params.get("filename"))));
+                if (!TextUtils.isEmpty(params.get("filename"))) {
+                    File file = new File(params.get("filename"));
+                    if (file.exists()) {
+                        entity.addPart("incident_photo[]",
+                                new FileBody(new File(params.get("filename"))));
+                    }
+                }
 
                 // NEED THIS NOW TO FIX ERROR 417
                 httpost.getParams().setBooleanParameter("http.protocol.expect-continue", false);
@@ -285,22 +316,26 @@ public class MainHttpClient {
                 HttpEntity respEntity = response.getEntity();
                 if (respEntity != null) {
                     InputStream serverInput = respEntity.getContent();
-                    if (Util.extractPayloadJSON(GetText(serverInput))) {
+                    return Util.extractPayloadJSON(GetText(serverInput));
 
-                        return true;
-                    }
                 }
             }
 
         } catch (MalformedURLException ex) {
             Log.d(CLASS_TAG, "PostFileUpload(): MalformedURLException");
             ex.printStackTrace();
-            return false;
+            return 11;
             // fall through and return false
-        } catch (Exception ex) {
-            return false;
+        } catch (IllegalArgumentException ex) {
+            Log.e(CLASS_TAG, ex.toString());
+            // invalid URI
+            return 12;
+        } catch (IOException e) {
+            Log.e(CLASS_TAG, e.toString());
+            // timeout
+            return 13;
         }
-        return false;
+        return 10;
     }
 
     public static byte[] fetchImage(String address) throws MalformedURLException, IOException {
