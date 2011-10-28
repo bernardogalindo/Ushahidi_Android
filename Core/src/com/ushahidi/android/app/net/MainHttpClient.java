@@ -114,7 +114,20 @@ public class MainHttpClient {
         // in milliseconds which is the timeout for waiting for data.
         HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
+<<<<<<< HEAD
         httpClient = new DefaultHttpClient(httpParameters);
+=======
+        SchemeRegistry schemeRegistry = new SchemeRegistry();
+
+        // http scheme
+        schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+        // https scheme
+        schemeRegistry.register(new Scheme("https", new EasySSLSocketFactory(), 443));
+
+        httpClient = new DefaultHttpClient(new ThreadSafeClientConnManager(httpParameters,
+                schemeRegistry), httpParameters);
+
+>>>>>>> 0968330... Update document to reflect current changes
     }
 
     public static HttpResponse GetURL(String URL) throws IOException {
