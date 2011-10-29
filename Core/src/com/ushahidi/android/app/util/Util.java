@@ -65,9 +65,8 @@ import com.ushahidi.android.app.net.MainHttpClient;
 
 /**
  * This is a utility class that has common methods to be used by most clsses.
- *  
+ * 
  * @author eyedol
- *
  */
 public class Util {
 
@@ -93,8 +92,9 @@ public class Util {
             + "[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     private static final String VALID_URL_PATTERN = "^(https?|ftp)://[a-z0-9-]+(\\.[a-z0-9-]+)+([/?].+)?$";
-    
+
     private static final String CLASS_TAG = Util.class.getSimpleName();
+
     /**
      * joins two strings together
      * 
@@ -202,8 +202,7 @@ public class Util {
             if (Util.isConnected(context)) {
 
                 if (Categories.getAllCategoriesFromWeb()) {
-                    mNewCategories = HandleXml
-                            .processCategoriesXml(Preferences.categoriesResponse);
+                    mNewCategories = HandleXml.processCategoriesXml(Preferences.categoriesResponse);
                 }
 
                 if (Incidents.getAllIncidentsFromWeb()) {
@@ -252,56 +251,49 @@ public class Util {
     /**
      * Extract Ushahidi payload JSON data
      * 
-     * @apram json_data - the json data to be formatted.
-     * @return String
+     * @papram json_data - the json data to be formatted.
+     * @return int 0 - success, 1 - missing parameter, 2 - invalid parameter, 3
+     *         - post failed, 5 - access denied, 6 - access limited, 7 - no
+     *         data, 8 - api disabled, 9 - no task found, 10 - json is wrong
      */
-    public static boolean extractPayloadJSON(String json_data) {
-        Log.d(CLASS_TAG, "extractPayloadJSON(): "+json_data);
-        
+    public static int extractPayloadJSON(String json_data) {
+        Log.d(CLASS_TAG, "extractPayloadJSON(): " + json_data);
         try {
             jsonObject = new JSONObject(json_data);
-            return jsonObject.getJSONObject("payload").getBoolean("success");
-
+            final String errorCode = jsonObject.getJSONObject("error").getString("code");
+            return Integer.parseInt(errorCode);
         } catch (JSONException e) {
-
-            return false;
+            Log.e(CLASS_TAG, e.toString());
+            return 10;
         }
 
     }
-    
+
     /**
      * For debugging purposes. Append content of a string to a file
      * 
      * @param text
      */
-    public static void appendLog(String text)
-    {       
-       File logFile = new File(Environment.getExternalStorageDirectory(),"ush_log.txt");
-       if (!logFile.exists())
-       {
-          try
-          {
-             logFile.createNewFile();
-          } 
-          catch (IOException e)
-          {
-             // TODO Auto-generated catch block
-             e.printStackTrace();
-          }
-       }
-       try
-       {
-          //BufferedWriter for performance, true to set append to file flag
-          BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true)); 
-          buf.append(text);
-          buf.newLine();
-          buf.close();
-       }
-       catch (IOException e)
-       {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-       }
+    public static void appendLog(String text) {
+        File logFile = new File(Environment.getExternalStorageDirectory(), "ush_log.txt");
+        if (!logFile.exists()) {
+            try {
+                logFile.createNewFile();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try {
+            // BufferedWriter for performance, true to set append to file flag
+            BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
+            buf.append(text);
+            buf.newLine();
+            buf.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -359,10 +351,9 @@ public class Util {
 
                 if (Categories.getAllCategoriesFromWeb()) {
 
-                    mNewCategories = HandleXml
-                            .processCategoriesXml(Preferences.categoriesResponse);
+                    mNewCategories = HandleXml.processCategoriesXml(Preferences.categoriesResponse);
                 } else {
-                    
+
                     return 1;
                 }
 
@@ -370,12 +361,13 @@ public class Util {
                     mNewIncidents = HandleXml.processIncidentsXml(Preferences.incidentsResponse);
 
                 } else {
-                    
+
                     return 2;
                 }
 
                 if (mNewCategories != null && mNewIncidents != null) {
-                    Log.d(CLASS_TAG,"processReport(): categories total: "+mNewCategories.size()+ " incidents total:"+mNewIncidents.size());
+                    Log.d(CLASS_TAG, "processReport(): categories total: " + mNewCategories.size()
+                            + " incidents total:" + mNewIncidents.size());
                     // delete all categories
                     MainApplication.mDb.deleteAllCategories();
                     MainApplication.mDb.deleteAllIncidents();
@@ -589,7 +581,7 @@ public class Util {
             }
 
             if (mCheckins != null && mUsers != null) {
-                //clear existin data
+                // clear existin data
                 MainApplication.mDb.deleteAllCheckins();
                 MainApplication.mDb.deleteUsers();
                 MainApplication.mDb.addUsers(mUsers);
@@ -650,5 +642,5 @@ public class Util {
             return false;
         }
     }
-    
+
 }
