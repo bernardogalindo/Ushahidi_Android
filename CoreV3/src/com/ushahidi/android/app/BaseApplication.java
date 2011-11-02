@@ -24,21 +24,27 @@ import android.app.Application;
 import android.util.Log;
 
 /**
- * Base application class
- *
- * Your application should extend this base class
+ * Base application class Your application should extend this base class
  */
 public class BaseApplication extends Application {
 
+    /**
+     * Allow logging to be turned on or off. Good for development.
+     **/
+    public static boolean LOGGING_MODE = false;
+
     protected void log(String message) {
-        Log.i(getClass().getName(), message);
+        if (LOGGING_MODE)
+            Log.i(getClass().getName(), message);
     }
 
-    protected void log(String format, Object...args) {
-        Log.i(getClass().getName(), String.format(format, args));
+    protected void log(String format, Object... args) {
+        if (LOGGING_MODE)
+            Log.i(getClass().getName(), String.format(format, args));
     }
 
     protected void log(String message, Exception ex) {
-        Log.e(getClass().getName(), message, ex);
+        if (LOGGING_MODE)
+            Log.e(getClass().getName(), message, ex);
     }
 }

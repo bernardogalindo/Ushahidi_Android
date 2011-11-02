@@ -9,12 +9,15 @@ import com.ushahidi.android.app.models.ExampleModel;
 import com.ushahidi.android.app.views.Widget;
 
 public class ExampleListAdapter extends BaseListAdapter<ExampleModel> {
-
+    static  final int l = R.id.example_list_item_label;
     class Widgets extends com.ushahidi.android.app.views.View {
+        
         public Widgets(View view) {
             super(view);
         }
-        @Widget(R.id.example_list_item_label)
+        
+        
+        //@Widget(R.id.example_list_item_label)
         TextView textView;
     }
 

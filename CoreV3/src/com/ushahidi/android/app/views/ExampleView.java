@@ -11,13 +11,14 @@ import com.ushahidi.android.app.R;
  *  All the widgets for /res/layout/example.xml
  */
 public class ExampleView extends View {
+    
     public ExampleView(Activity activity) {
         super(activity);
     }
 
-    @Widget(R.id.example_label)
+    //@Widget(R.id.example_label)
     public TextView label;
 
-    @Widget(R.id.example_value)
+    //@Widget(R.id.example_value)
     public EditText value;
 }

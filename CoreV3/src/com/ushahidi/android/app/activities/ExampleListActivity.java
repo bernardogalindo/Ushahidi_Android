@@ -35,10 +35,6 @@ public class ExampleListActivity extends BaseListActivity<ExampleListView, Examp
         ).execute();
     }
 
-    @Override
-    protected void onLoaded() {
-        log("onLoaded");
-    }
 
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         toastShort("onItemClick %d", position);
@@ -84,5 +80,11 @@ public class ExampleListActivity extends BaseListActivity<ExampleListView, Examp
             }
             return true;
         }
+    }
+
+    @Override
+    protected void onLoaded(boolean success) {
+        // TODO Auto-generated method stub
+        
     }
 }

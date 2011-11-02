@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK/Core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Core"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ApacheMime"/>
@@ -12,7 +11,8 @@
 	<classpathentry kind="lib" path="/home/eyedol/Devel/Workspace/Ushahidi_Android/Core/libs/httpclient-4.1.1.jar"/>
 	<classpathentry kind="lib" path="/home/eyedol/Devel/Workspace/Ushahidi_Android/Core/libs/httpcore-4.1.jar"/>
 	<classpathentry kind="lib" path="/home/eyedol/Devel/Workspace/Ushahidi_Android/Core/libs/httpmime-4.1.1.jar"/>
-	<classpathentry kind="src" path="Core_src"/>
+	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

@@ -32,9 +32,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>Core_src</name>
+			<name>src</name>
 			<type>2</type>
-			<locationURI>_android_Core_2023bf/src</locationURI>
+			<location>/home/eyedol/Devel/Workspace/Ushahidi_Android/CoreV3/src</location>
 		</link>
 	</linkedResources>
 </projectDescription>
