@@ -16,7 +16,7 @@ import com.ushahidi.android.app.views.ExampleListView;
  */
 public class ExampleListActivity extends BaseListActivity<ExampleListView, ExampleModel, ExampleListAdapter> {
 
-    protected ExampleListActivity() {
+    public ExampleListActivity() {
         super(ExampleListView.class,
               ExampleListAdapter.class,
               R.layout.example_list,
