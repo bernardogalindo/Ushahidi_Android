@@ -27,8 +27,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
+
 import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 import com.ushahidi.android.app.views.View;
 
@@ -37,7 +37,7 @@ import com.ushahidi.android.app.views.View;
  *
  * Add shared functionality that exists between all Map Activities
  */
-public abstract class BaseMapActivity<V extends View> extends MapActivity implements LocationListener {
+public abstract class BaseMapActivity<V extends View> extends BaseActionBarMapActivity implements LocationListener {
 
     /**
      * Layout resource id

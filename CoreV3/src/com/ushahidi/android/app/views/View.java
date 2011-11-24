@@ -20,11 +20,11 @@
 
 package com.ushahidi.android.app.views;
 
-import android.app.Activity;
-import android.util.Log;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 /**
  * Base class for Views
@@ -37,8 +37,8 @@ public abstract class View {
      * View
      * @param activity Activity
      */
-    public View(Activity activity) {
-        for(Class clazz : new Class[]{getClass(), getClass().getSuperclass()}) {
+    public View(FragmentActivity activity) {
+        for(Class<?> clazz : new Class[]{getClass(), getClass().getSuperclass()}) {
             if (clazz != null && View.class.isAssignableFrom(clazz)) {
                 for (Field field : clazz.getDeclaredFields()) {
                     try {
@@ -67,7 +67,7 @@ public abstract class View {
      * @param view View
      */
     public View(android.view.View view) {
-        for(Class clazz : new Class[]{getClass(), getClass().getSuperclass()}) {
+        for(Class<?> clazz : new Class[]{getClass(), getClass().getSuperclass()}) {
             if (clazz != null && View.class.isAssignableFrom(clazz)) {
                 for (Field field : clazz.getDeclaredFields()) {
                     try {

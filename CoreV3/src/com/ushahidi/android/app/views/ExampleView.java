@@ -1,9 +1,8 @@
 package com.ushahidi.android.app.views;
 
-import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 import android.widget.EditText;
 import android.widget.TextView;
-import com.ushahidi.android.app.R;
 
 /**
  * ExampleView
@@ -12,7 +11,7 @@ import com.ushahidi.android.app.R;
  */
 public class ExampleView extends View {
     
-    public ExampleView(Activity activity) {
+    public ExampleView(FragmentActivity activity) {
         super(activity);
     }
 

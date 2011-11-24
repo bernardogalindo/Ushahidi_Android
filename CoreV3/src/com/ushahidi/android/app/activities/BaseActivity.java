@@ -20,8 +20,8 @@
 
 package com.ushahidi.android.app.activities;
 
-import android.app.Activity;
-import android.content.Context;
+import java.lang.reflect.InvocationTargetException;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,14 +39,10 @@ import android.widget.Toast;
 import com.ushahidi.android.app.BaseApplication;
 import com.ushahidi.android.app.views.View;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Type;
-
 /**
  * BaseActivity Add shared functionality that exists between all Activities
  */
-public abstract class BaseActivity<V extends View> extends Activity {
+public abstract class BaseActivity<V extends View> extends BaseActionBarActivity {
 
     /**
      * Layout resource id
@@ -89,7 +85,7 @@ public abstract class BaseActivity<V extends View> extends Activity {
         if (layout != 0) {
             setContentView(layout);
         }
-        view = createInstance(viewClass, Activity.class, this);
+        view = createInstance(viewClass, BaseActionBarActivity.class, this);
     }
 
     @Override

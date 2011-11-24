@@ -31,7 +31,7 @@ public class BaseApplication extends Application {
     /**
      * Allow logging to be turned on or off. Good for development.
      **/
-    public static boolean LOGGING_MODE = false;
+    public static boolean LOGGING_MODE = true;
 
     protected void log(String message) {
         if (LOGGING_MODE)
