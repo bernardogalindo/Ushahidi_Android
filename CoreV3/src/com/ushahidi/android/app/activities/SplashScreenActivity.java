@@ -57,7 +57,7 @@ public class SplashScreenActivity extends Activity {
                 } catch (InterruptedException e) {
                     // do nothing
                 } finally {
-                    startActivity(new Intent(SplashScreenActivity.this, AddReportActivity.class));
+                    startActivity(new Intent(SplashScreenActivity.this, AddCheckinActivity.class));
                     finish();
                 }
             }

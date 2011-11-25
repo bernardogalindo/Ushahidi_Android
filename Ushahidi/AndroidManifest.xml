@@ -76,6 +76,26 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+        
+            <!-- Add a new checkin -->
+        <activity
+            android:configChanges="screenLayout|orientation|keyboardHidden|touchscreen|navigation"
+            android:name=".activities.AddCheckinActivity" android:label="@string/checkin_btn">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.CHOOSER" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

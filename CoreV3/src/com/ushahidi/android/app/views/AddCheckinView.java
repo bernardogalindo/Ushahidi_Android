@@ -17,45 +17,17 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  **/
-
 package com.ushahidi.android.app.views;
 
 import android.app.Activity;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 /**
- * AddReportView All the widgets for /res/layout/add_report.xml
+ * @author eyedol
+ *
  */
-public class AddReportView extends View {
+public class AddCheckinView extends View {
 
-    private EditText mIncidentTitle;
-
-    private EditText mIncidentLocation;
-
-    private EditText mIncidentDesc;
-
-    private ImageView mSelectedPhoto;
-
-    private EditText mLatitude;
-
-    private EditText mLongitude;
-
-    private TextView mActivityTitle;
-
-    private Button mBtnSend;
-
-    private Button mBtnAddCategory;
-
-    private Button mPickTime;
-
-    private Button mPickDate;
-
-    private Button mBtnPicture;
-
-    public AddReportView(Activity activity) {
+    public AddCheckinView(Activity activity) {
         super(activity);
         // TODO Auto-generated constructor stub
     }

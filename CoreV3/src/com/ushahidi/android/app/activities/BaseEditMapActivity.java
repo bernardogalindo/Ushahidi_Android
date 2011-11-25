@@ -34,10 +34,10 @@ import com.ushahidi.android.app.views.View;
  *
  * Add shared functionality that exists between all Edit Activities
  */
-public abstract class BaseEditActivity<V extends View, M extends Model> extends BaseActivity<V> {
+public abstract class BaseEditMapActivity<V extends View, M extends Model> extends BaseMapActivity<V> {
 
-    public BaseEditActivity(Class<V> view, int layout, int menu) {
-        super(view, layout, menu);
+    public BaseEditMapActivity(Class<V> view, int layout , int menu, int mapView) {
+        super(view, layout, menu,mapView);
     }
 
     @Override
@@ -65,7 +65,7 @@ public abstract class BaseEditActivity<V extends View, M extends Model> extends 
                    .setCancelable(false)
                    .setPositiveButton(getText(R.string.save), new DialogInterface.OnClickListener() {
                        public void onClick(DialogInterface dialog, int id) {
-                           new SaveTask(BaseEditActivity.this).execute((String)null);
+                           new SaveTask(BaseEditMapActivity.this).execute((String)null);
                        }
                    })
                    .setNeutralButton(getText(R.string.discard), new DialogInterface.OnClickListener() {

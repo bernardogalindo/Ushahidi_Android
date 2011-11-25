@@ -24,60 +24,42 @@ import android.location.Location;
 import android.os.Bundle;
 
 import com.ushahidi.android.app.R;
-import com.ushahidi.android.app.models.AddReportModel;
-import com.ushahidi.android.app.views.AddReportView;
+import com.ushahidi.android.app.models.AddCheckinModel;
+import com.ushahidi.android.app.views.AddCheckinView;
 
 /**
  * @author eyedol
  */
-public class AddReportActivity extends BaseEditMapActivity<AddReportView,AddReportModel> {
+public class AddCheckinActivity extends BaseEditMapActivity<AddCheckinView, AddCheckinModel> {
 
-    public AddReportActivity() {
-        super(AddReportView.class, R.layout.add_report, R.menu.add_report,R.id.location_map);
+    public AddCheckinActivity() {
+        super(AddCheckinView.class, R.layout.add_checkin, R.menu.add_checkin,
+                R.id.checkin_location_map);
         // TODO Auto-generated constructor stub
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-    
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //log("onStart label=%s", view.label.getText());
-        //log("onStart value=%s", view.value.getText());
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //log("onPause label=%s", view.label.getText());
-        //log("onPause value=%s", view.value.getText());
-    }
-
-    @Override
-    public void onLocationChanged(Location arg0) {
+    public void onLocationChanged(Location location) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
-    public void onProviderDisabled(String arg0) {
+    public void onProviderDisabled(String provider) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void onProviderEnabled(String provider) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
@@ -85,4 +67,5 @@ public class AddReportActivity extends BaseEditMapActivity<AddReportView,AddRepo
         // TODO Auto-generated method stub
         return false;
     }
+
 }
