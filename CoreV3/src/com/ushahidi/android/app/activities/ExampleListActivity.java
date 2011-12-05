@@ -1,9 +1,10 @@
 package com.ushahidi.android.app.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.AdapterView;
+
 import com.ushahidi.android.app.R;
 import com.ushahidi.android.app.adapters.ExampleListAdapter;
 import com.ushahidi.android.app.models.ExampleModel;
@@ -45,7 +46,7 @@ public class ExampleListActivity extends BaseListActivity<ExampleListView, Examp
      */
     class TaskOne extends ProgressTask {
 
-        public TaskOne(Activity activity) {
+        public TaskOne(FragmentActivity activity) {
             super(activity, R.string.loading_);
             //pass custom loading message to super call
         }
@@ -66,7 +67,7 @@ public class ExampleListActivity extends BaseListActivity<ExampleListView, Examp
      */
     class TaskTwo extends ProgressTask {
 
-        public TaskTwo(Activity activity) {
+        public TaskTwo(FragmentActivity activity) {
             super(activity, R.string.loading_);
             //pass custom loading message to super call
         }

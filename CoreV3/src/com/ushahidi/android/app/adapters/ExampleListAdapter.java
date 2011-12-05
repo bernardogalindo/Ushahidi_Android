@@ -4,9 +4,9 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.ushahidi.android.app.R;
 import com.ushahidi.android.app.models.ExampleModel;
-import com.ushahidi.android.app.views.Widget;
 
 public class ExampleListAdapter extends BaseListAdapter<ExampleModel> {
     static  final int l = R.id.example_list_item_label;

@@ -4,3 +4,5 @@ gen/
 *.swp
 .settings
 .DS_Store
+CoreV3/libs/*.jar
+Ushahidi/libs/*.jar

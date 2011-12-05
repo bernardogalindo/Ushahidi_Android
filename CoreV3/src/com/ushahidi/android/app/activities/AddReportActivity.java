@@ -85,4 +85,10 @@ public class AddReportActivity extends BaseEditMapActivity<AddReportView,AddRepo
         // TODO Auto-generated method stub
         return false;
     }
+
+    @Override
+    protected boolean isRouteDisplayed() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

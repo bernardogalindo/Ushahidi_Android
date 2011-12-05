@@ -20,10 +20,11 @@
 
 package com.ushahidi.android.app.activities;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
+
 import com.ushahidi.android.app.R;
 import com.ushahidi.android.app.models.Model;
 import com.ushahidi.android.app.tasks.ProgressTask;
@@ -95,7 +96,7 @@ public abstract class BaseEditActivity<V extends View, M extends Model> extends 
      * Background progress task for saving Model
      */
     protected class SaveTask extends ProgressTask {
-        public SaveTask(Activity activity) {
+        public SaveTask(FragmentActivity activity) {
             super(activity, R.string.saving_);
         }
 

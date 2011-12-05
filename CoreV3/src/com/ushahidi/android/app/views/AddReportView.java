@@ -20,8 +20,8 @@
 
 package com.ushahidi.android.app.views;
 
-import android.app.Activity;
-import android.widget.Button;
+import android.support.v4.app.FragmentActivity;
+/*import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,7 +31,7 @@ import android.widget.TextView;
  */
 public class AddReportView extends View {
 
-    private EditText mIncidentTitle;
+    /*private EditText mIncidentTitle;
 
     private EditText mIncidentLocation;
 
@@ -53,9 +53,9 @@ public class AddReportView extends View {
 
     private Button mPickDate;
 
-    private Button mBtnPicture;
+    private Button mBtnPicture;*/
 
-    public AddReportView(Activity activity) {
+    public AddReportView(FragmentActivity activity) {
         super(activity);
         // TODO Auto-generated constructor stub
     }

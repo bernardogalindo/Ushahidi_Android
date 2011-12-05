@@ -24,10 +24,11 @@ import java.lang.reflect.InvocationTargetException;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.Menu;
+import android.support.v4.view.MenuItem;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -42,7 +43,7 @@ import com.ushahidi.android.app.views.View;
 /**
  * BaseActivity Add shared functionality that exists between all Activities
  */
-public abstract class BaseActivity<V extends View> extends BaseActionBarActivity {
+public abstract class BaseActivity<V extends View> extends FragmentActivity {
 
     /**
      * Layout resource id
@@ -78,14 +79,15 @@ public abstract class BaseActivity<V extends View> extends BaseActionBarActivity
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         log("onCreate");
         if (layout != 0) {
             setContentView(layout);
         }
-        view = createInstance(viewClass, BaseActionBarActivity.class, this);
+    
+        view = createInstance(viewClass, BaseActivity.class, this);
+
     }
 
     @Override
@@ -138,7 +140,7 @@ public abstract class BaseActivity<V extends View> extends BaseActionBarActivity
         log("onActivityResult");
     }
 
-    @Override
+   @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (this.menu != 0) {
             getMenuInflater().inflate(this.menu, menu);
@@ -146,6 +148,7 @@ public abstract class BaseActivity<V extends View> extends BaseActionBarActivity
         }
         return false;
     }
+     
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -225,7 +228,7 @@ public abstract class BaseActivity<V extends View> extends BaseActionBarActivity
     }
 
     @SuppressWarnings("unchecked")
-    protected <T> T createInstance(Class type, Class constructor, Object... params) {
+    protected <T> T createInstance(Class<?> type, Class<?> constructor, Object... params) {
         try {
             return (T)type.getConstructor(constructor).newInstance(params);
         } catch (InstantiationException e) {

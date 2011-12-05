@@ -20,11 +20,12 @@
 
 package com.ushahidi.android.app.activities;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import com.ushahidi.android.app.R;
 import com.ushahidi.android.app.adapters.BaseListAdapter;
 import com.ushahidi.android.app.models.Model;
@@ -32,15 +33,15 @@ import com.ushahidi.android.app.tasks.ProgressTask;
 import com.ushahidi.android.app.views.View;
 
 /**
- * BaseListActivity
- *
- * Add shared functionality that exists between all List Activities
+ * BaseListActivity Add shared functionality that exists between all List
+ * Activities
  */
 public abstract class BaseListActivity<V extends View, M extends Model, L extends BaseListAdapter<M>>
-        extends BaseActivity<V> implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+        extends BaseActivity<V> implements AdapterView.OnItemClickListener,
+        AdapterView.OnItemSelectedListener {
 
     /**
-     *  ListView resource id
+     * ListView resource id
      */
     private final int listViewId;
 
@@ -61,6 +62,7 @@ public abstract class BaseListActivity<V extends View, M extends Model, L extend
 
     /**
      * BaseListActivity
+     * 
      * @param view View clas type
      * @param adapter List adapter class type
      * @param layout layout resource id
@@ -74,7 +76,6 @@ public abstract class BaseListActivity<V extends View, M extends Model, L extend
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (listViewId != 0) {
@@ -84,7 +85,7 @@ public abstract class BaseListActivity<V extends View, M extends Model, L extend
             if (emptyView != null) {
                 listView.setEmptyView(emptyView);
             }
-            adapter = createInstance(adapterClass,Context.class, this);
+            adapter = createInstance(adapterClass, Context.class, this);
             listView.setAdapter(adapter);
             listView.setFocusable(true);
             listView.setFocusableInTouchMode(true);
@@ -93,40 +94,45 @@ public abstract class BaseListActivity<V extends View, M extends Model, L extend
 
     /**
      * Called after ListAdapter has been loaded
+     * 
      * @param success true is successfully loaded
      */
     protected abstract void onLoaded(boolean success);
 
     @Override
-	protected void onResume(){
-		super.onResume();
-		new LoadingTask(this).execute((String)null);
+    protected void onResume() {
+        super.onResume();
+        new LoadingTask(this).execute((String)null);
     }
 
     @SuppressWarnings("unchecked")
-	protected M getItem(int position) {
-		return (M)listView.getItemAtPosition(position);
-	}
+    protected M getItem(int position) {
+        return (M)listView.getItemAtPosition(position);
+    }
 
     @SuppressWarnings("unchecked")
     protected M getSelectedItem() {
-		return (M)listView.getSelectedItem();
-	}
+        return (M)listView.getSelectedItem();
+    }
 
-    public void onItemSelected(AdapterView<?> adapterView, android.view.View view, int position, long id) {}
+    public void onItemSelected(AdapterView<?> adapterView, android.view.View view, int position,
+            long id) {
+    }
 
-    public void onNothingSelected(AdapterView<?> adapterView) {}
+    public void onNothingSelected(AdapterView<?> adapterView) {
+    }
 
     /**
-     * ProgressTask sub-class for showing Loading... dialog while the BaseListAdapter loads the data
+     * ProgressTask sub-class for showing Loading... dialog while the
+     * BaseListAdapter loads the data
      */
     protected class LoadingTask extends ProgressTask {
-        public LoadingTask(Activity activity) {
+        public LoadingTask(FragmentActivity activity) {
             super(activity, R.string.loading_);
         }
 
         @Override
-        protected Boolean doInBackground(String...args) {
+        protected Boolean doInBackground(String... args) {
             adapter.refresh(activity);
             return true;
         }

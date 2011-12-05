@@ -68,4 +68,10 @@ public class AddCheckinActivity extends BaseEditMapActivity<AddCheckinView, AddC
         return false;
     }
 
+    @Override
+    protected boolean isRouteDisplayed() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }

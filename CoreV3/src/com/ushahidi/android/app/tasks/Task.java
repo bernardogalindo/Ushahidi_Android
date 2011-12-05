@@ -20,8 +20,9 @@
 
 package com.ushahidi.android.app.tasks;
 
-import android.app.Activity;
 import android.os.AsyncTask;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentMapActivity;
 import android.util.Log;
 
 /**
@@ -31,12 +32,18 @@ import android.util.Log;
  */
 public abstract class Task<A, P, R> extends AsyncTask<A, P, R> {
 
-    protected final Activity activity;
+    protected  FragmentActivity activity;
 
-    protected Task(Activity activity) {
+    protected FragmentMapActivity mapActivity;
+    
+    protected Task(FragmentActivity activity) {
         this.activity = activity;
     }
-
+    
+    protected Task(FragmentMapActivity mapActivity) {
+        this.mapActivity = mapActivity;
+    }
+    
     @Override
     protected void onPreExecute() {
         log("onPreExecute");

@@ -19,7 +19,7 @@
  **/
 package com.ushahidi.android.app.views;
 
-import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 
 /**
  * @author eyedol
@@ -27,7 +27,7 @@ import android.app.Activity;
  */
 public class AddCheckinView extends View {
 
-    public AddCheckinView(Activity activity) {
+    public AddCheckinView(FragmentActivity activity) {
         super(activity);
         // TODO Auto-generated constructor stub
     }

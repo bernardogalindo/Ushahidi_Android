@@ -33,4 +33,5 @@ public class ExampleActivity extends BaseActivity<ExampleView> {
         log("onPause label=%s", view.label.getText());
         log("onPause value=%s", view.value.getText());
     }
+
 }

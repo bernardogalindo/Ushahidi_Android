@@ -23,7 +23,7 @@ package com.ushahidi.android.app.views;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
-import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 /**
@@ -37,7 +37,7 @@ public abstract class View {
      * View
      * @param activity Activity
      */
-    public View(Activity activity) {
+    public View(FragmentActivity activity) {
         for(Class<?> clazz : new Class[]{getClass(), getClass().getSuperclass()}) {
             if (clazz != null && View.class.isAssignableFrom(clazz)) {
                 for (Field field : clazz.getDeclaredFields()) {

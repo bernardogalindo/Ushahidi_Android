@@ -25,7 +25,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
+import android.support.v4.app.FragmentMapActivity;
+import android.support.v4.view.Menu;
 import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
@@ -33,11 +34,11 @@ import com.google.android.maps.MapView;
 import com.ushahidi.android.app.views.View;
 
 /**
- * BaseMapActivity
- *
- * Add shared functionality that exists between all Map Activities
+ * BaseMapActivity Add shared functionality that exists between all Map
+ * Activities
  */
-public abstract class BaseMapActivity<V extends View> extends BaseActionBarMapActivity implements LocationListener {
+public abstract class BaseMapActivity<V extends View> extends FragmentMapActivity implements
+        LocationListener {
 
     /**
      * Layout resource id
@@ -50,7 +51,7 @@ public abstract class BaseMapActivity<V extends View> extends BaseActionBarMapAc
     protected final int menu;
 
     /**
-     *  MapView resource id
+     * MapView resource id
      */
     protected final int mapViewId;
 
@@ -75,7 +76,8 @@ public abstract class BaseMapActivity<V extends View> extends BaseActionBarMapAc
     protected LocationManager locationManager;
 
     /**
-     *  BaseMapActivity
+     * BaseMapActivity
+     * 
      * @param view View class type
      * @param layout layout resource id
      * @param menu menu resource id
@@ -89,7 +91,7 @@ public abstract class BaseMapActivity<V extends View> extends BaseActionBarMapAc
     }
 
     @Override
-	public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (layout != 0) {
             setContentView(layout);
@@ -103,47 +105,42 @@ public abstract class BaseMapActivity<V extends View> extends BaseActionBarMapAc
     }
 
     @Override
-	protected void onResume() {
-		super.onResume();
+    protected void onResume() {
+        super.onResume();
     }
 
-	@Override
-	protected void onPause() {
-		super.onPause();
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-		if (this.menu != 0) {
-			getMenuInflater().inflate(this.menu, menu);
-			return true;
-		}
-		return false;
+        if (this.menu != 0) {
+            getMenuInflater().inflate(this.menu, menu);
+            return true;
+        }
+        return false;
     }
 
-    @Override
-	protected boolean isRouteDisplayed() {
-		return false;
-	}
-
     public void centerAtLocation(double latitude, double longitude) {
-		mapView.getController().setCenter(getPoint(latitude, longitude));
-	}
+        mapView.getController().setCenter(getPoint(latitude, longitude));
+    }
 
-	public void centerAtLocation(double latitude, double longitude, int zoom) {
-		mapView.getController().setCenter(getPoint(latitude, longitude));
-		mapView.getController().setZoom(zoom);
-	}
+    public void centerAtLocation(double latitude, double longitude, int zoom) {
+        mapView.getController().setCenter(getPoint(latitude, longitude));
+        mapView.getController().setZoom(zoom);
+    }
 
     protected static GeoPoint getPoint(double latitude, double longitude) {
-		return new GeoPoint((int)(latitude*1000000.0), (int)(longitude*1000000.0));
-	}
+        return new GeoPoint((int)(latitude * 1000000.0), (int)(longitude * 1000000.0));
+    }
 
     protected void log(String message) {
         Log.i(getClass().getName(), message);
     }
 
-    protected void log(String format, Object...args) {
+    protected void log(String format, Object... args) {
         Log.i(getClass().getName(), String.format(format, args));
     }
 

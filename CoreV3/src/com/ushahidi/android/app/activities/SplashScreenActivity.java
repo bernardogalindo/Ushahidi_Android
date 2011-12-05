@@ -22,14 +22,14 @@ package com.ushahidi.android.app.activities;
 
 import com.ushahidi.android.app.R;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.MotionEvent;
 import android.view.Window;
 
-public class SplashScreenActivity extends Activity {
+public class SplashScreenActivity extends FragmentActivity {
     private boolean active = true;
 
     private int splashTime = 5000;
@@ -57,7 +57,7 @@ public class SplashScreenActivity extends Activity {
                 } catch (InterruptedException e) {
                     // do nothing
                 } finally {
-                    startActivity(new Intent(SplashScreenActivity.this, AddCheckinActivity.class));
+                    startActivity(new Intent(SplashScreenActivity.this, ListMapActivity.class));
                     finish();
                 }
             }
