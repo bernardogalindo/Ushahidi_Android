@@ -6,3 +6,7 @@ gen/
 .DS_Store
 CoreV3/libs/*.jar
 Ushahidi/libs/*.jar
+Ushahidi/local.properties
+Beijing/local.properties
+Inherity/local.properties
+Iccm/local.properties

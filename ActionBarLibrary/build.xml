@@ -31,4 +31,5 @@
 		<mkdir dir="${build.dir}/jar"/>
 		<jar destfile="${jar-v4.file}" basedir="${build.dir}/classes-v4" />
 	</target>
+	
 </project>

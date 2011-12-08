@@ -13,7 +13,10 @@
 	<string name="add_a_photo">Add a Photo</string>
 	<string name="choose_categories">Choose Categories</string>
 	<string name="add_map">Add Map</string>
-	
+	<string name="checkin">Check In</string>
+	<string name="checkins">Check Ins</string>
+	<string name="report">Report</string>
+	<string name="reports">Reports</string>
 	<string name="add_report">Add Report</string>
     <string name="view_incident">View Reports</string>
     <string name="incident_details">Report Detail</string>

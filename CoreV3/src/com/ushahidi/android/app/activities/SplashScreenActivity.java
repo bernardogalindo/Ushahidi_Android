@@ -57,7 +57,7 @@ public class SplashScreenActivity extends FragmentActivity {
                 } catch (InterruptedException e) {
                     // do nothing
                 } finally {
-                    startActivity(new Intent(SplashScreenActivity.this, ListMapActivity.class));
+                    startActivity(new Intent(SplashScreenActivity.this, ViewReportActivity.class));
                     finish();
                 }
             }
