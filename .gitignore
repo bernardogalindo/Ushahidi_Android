@@ -5,6 +5,7 @@ gen/
 .settings
 .DS_Store
 CoreV3/libs/*.jar
+CoreV3/local.properties
 Ushahidi/libs/*.jar
 Ushahidi/local.properties
 Beijing/local.properties
